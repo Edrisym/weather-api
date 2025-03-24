@@ -3,9 +3,10 @@ package services
 import (
 	"encoding/json"
 	"fmt"
-	"io/ioutil"
+
 	"net/http"
 
+	"io"
 	"weather-api/utils"
 )
 
@@ -83,7 +84,7 @@ func GetWeather(lat, lon string) (*WeatherResponse, error) {
 		return nil, fmt.Errorf("weather API request failed with status: %s", resp.Status)
 	}
 
-	body, err := ioutil.ReadAll(resp.Body)
+	body, err := io.ReadAll(resp.Body)
 	if err != nil {
 		return nil, err
 	}
